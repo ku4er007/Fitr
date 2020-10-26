@@ -1,5 +1,4 @@
 import org.openqa.selenium.By;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -27,7 +26,14 @@ public class Settings extends forFitr {
     By payoutsTab = By.xpath("//a[@href='/coach/profile/payouts'][contains(text(),'Payouts')]");
     By emailsTab = By.xpath("//a[@href='/coach/profile/settings'][contains(text(),'Emails')]");
     By passwordTab = By.xpath("//a[@href='/coach/profile/password'][contains(text(),'Password')]");
+    By oldPasswordInputField = By.xpath("//input[@class='form-control'][@placeholder='Old Password']");
+    By newPasswordInputField = By.xpath("//input[@class='form-control'][@placeholder='New Password']");
+    By confirmNewPasswordInputField = By.xpath("//input[@class='form-control'][@placeholder='Repeat New Password']");
+    By submitNewPasswordButton = By.xpath("//button[@type='submit']");
+    By invalidPasswordText = By.xpath("//div[@class='invalid-feedback']");
+    By warningEmptyPasswordFields = By.xpath("//div[@class='custom-template-title']");
     By changePasswordPageTitle = By.xpath("//h3");
+    By logOutButton = By.xpath("//button[@class='btn btn-outline-danger']");
 
     @BeforeMethod
     public void navigateToUrl() {
@@ -53,6 +59,9 @@ public class Settings extends forFitr {
         assertEquals(driver.getCurrentUrl(), emailsSettingUrl);
         driver.findElement(passwordTab).click();
         assertEquals(driver.getCurrentUrl(), passwordSettingUrl);
+        driver.findElement(userAvatarHeaderElement).click();
+        driver.findElement(logOutButton).click();
+        wait.until(visibilityOfElementLocated(loginPageTitle));
     }
 
     @Test
@@ -66,11 +75,15 @@ public class Settings extends forFitr {
         driver.findElement(settingsButton).click();
         wait.until(visibilityOfElementLocated(passwordTab)).click();
         wait.until(visibilityOfElementLocated(changePasswordPageTitle));
-        driver.findElement(By.xpath("//input[@class='form-control'][@placeholder='Old Password']")).sendKeys(password);
-        driver.findElement(By.xpath("//input[@class='form-control'][@placeholder='New Password']")).sendKeys(newPassword);
-        driver.findElement(By.xpath("//input[@class='form-control'][@placeholder='Repeat New Password']")).sendKeys(newPassword);
-        driver.findElement(By.xpath("//button[@type='submit']")).click();
+        driver.findElement(oldPasswordInputField).sendKeys(password);
+        driver.findElement(newPasswordInputField).sendKeys(newPassword);
+        driver.findElement(confirmNewPasswordInputField).sendKeys(newPassword);
+        driver.findElement(submitNewPasswordButton).click();
         assertEquals(driver.getCurrentUrl(), passwordSettingUrl);
+        driver.findElement(userAvatarHeaderElement).click();
+        driver.findElement(logOutButton).click();
+        wait.until(visibilityOfElementLocated(loginPageTitle));
+
     }
 
     @Test
@@ -84,11 +97,14 @@ public class Settings extends forFitr {
         driver.findElement(settingsButton).click();
         wait.until(visibilityOfElementLocated(passwordTab)).click();
         wait.until(visibilityOfElementLocated(changePasswordPageTitle));
-        driver.findElement(By.xpath("//input[@class='form-control'][@placeholder='Old Password']")).sendKeys(password);
-        driver.findElement(By.xpath("//input[@class='form-control'][@placeholder='New Password']")).sendKeys(newPassword);
-        driver.findElement(By.xpath("//input[@class='form-control'][@placeholder='Repeat New Password']")).sendKeys(wrongPassword);
-        driver.findElement(By.xpath("//button[@type='submit']")).click();
-        wait.until(visibilityOfElementLocated(By.xpath("//div[@class='invalid-feedback']")));
+        driver.findElement(oldPasswordInputField).sendKeys(password);
+        driver.findElement(newPasswordInputField).sendKeys(newPassword);
+        driver.findElement(confirmNewPasswordInputField).sendKeys(wrongPassword);
+        driver.findElement(submitNewPasswordButton).click();
+        wait.until(visibilityOfElementLocated(invalidPasswordText));
+        driver.findElement(userAvatarHeaderElement).click();
+        driver.findElement(logOutButton).click();
+        wait.until(visibilityOfElementLocated(loginPageTitle));
     }
     @Test
     public void negativeChangeWrongPasswordTest() {
@@ -101,10 +117,13 @@ public class Settings extends forFitr {
         driver.findElement(settingsButton).click();
         wait.until(visibilityOfElementLocated(passwordTab)).click();
         wait.until(visibilityOfElementLocated(changePasswordPageTitle));
-        driver.findElement(By.xpath("//input[@class='form-control'][@placeholder='Old Password']")).sendKeys(password);
-        driver.findElement(By.xpath("//input[@class='form-control'][@placeholder='New Password']")).sendKeys(wrongPassword);
-        driver.findElement(By.xpath("//input[@class='form-control'][@placeholder='Repeat New Password']")).sendKeys(wrongPassword);
-        driver.findElement(By.xpath("//button[@type='submit']")).click();
-        wait.until(visibilityOfElementLocated(By.xpath("//div[@class='custom-template-title']")));
+        driver.findElement(oldPasswordInputField).sendKeys(password);
+        driver.findElement(newPasswordInputField).sendKeys(wrongPassword);
+        driver.findElement(confirmNewPasswordInputField).sendKeys(wrongPassword);
+        driver.findElement(submitNewPasswordButton).click();
+        wait.until(visibilityOfElementLocated(warningEmptyPasswordFields));
+        driver.findElement(userAvatarHeaderElement).click();
+        driver.findElement(logOutButton).click();
+        wait.until(visibilityOfElementLocated(loginPageTitle));
     }
 }
