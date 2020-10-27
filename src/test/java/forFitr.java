@@ -14,7 +14,7 @@ public class forFitr {
     public void setupDriver() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-        wait = new WebDriverWait(driver, 25);
+        wait = new WebDriverWait(driver, 30);
     }
     @AfterClass
     public void closeDriver(){
