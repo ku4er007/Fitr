@@ -22,7 +22,7 @@ public class Settings extends forFitr {
     By emailInputField = By.xpath("//input[@id='email']");
     By passwordInputField = By.name("current-password");
     By loginToFitrButton = By.xpath("//button");
-    By programsHeaderElement = By.xpath("//a[@class='nav-link router-link-exact-active active'][contains(text(),'Programs')]");
+    By programsHeaderElement = By.xpath("//a[@class='nav-link active']");
     By userAvatarHeaderElement = By.xpath("//div[@class='avatar sm2 circle avatar-empty fit_cover']");
     By settingsButton = By.xpath("//a[@href='/coach/profile/payouts']");
     By generalTab = By.xpath("//a[@href='/coach/profile/info']");

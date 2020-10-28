@@ -10,7 +10,8 @@ import static org.testng.AssertJUnit.assertEquals;
 public class OnboardingTestFitr extends forFitr {
     String loginUrl = "https://dev.fitr.training/onboarding/sign_in";
     String signUpUrl = "https://dev.fitr.training/onboarding/role";
-    String afterLoginUrl = "https://dev.fitr.training/coach/programs/all";
+    By userAvatarHeaderElement = By.xpath("//div[@class='avatar sm2 circle avatar-empty fit_cover']");
+    By logOutButton = By.xpath("//button[@class='btn btn-outline-danger']");
     By loginPageTitle = By.xpath("//h1");
     By signupHyperlink = By.xpath("//a[@href='/onboarding/role']");
     By loginHyperlink = By.xpath("//a[@href='/onboarding/sign_in']");
@@ -33,10 +34,10 @@ public class OnboardingTestFitr extends forFitr {
     By startTrialButton = By.xpath("//button[@id='coachsignup']");
     By firstAlertDescription = By.xpath("//p[@class='mb-0']");
     By closedAlertButton = By.xpath("//button[@class='close']");
-    By programsHeaderElement = By.xpath("//a[@class='nav-link router-link-exact-active active']");
+    By programsHeaderElement = By.xpath("//a[@class='nav-link active']");
     String firstName = "Константин";
     String lastName = "Дорошенко";
-    String newEmail = "ku4er007+1@gmail.com";
+    String newEmail = "ku4er007+111@gmail.com";
     String newPassword = "Zaq123123!";
     String confirmNewPassword = "Zaq123123!";
 
@@ -44,7 +45,7 @@ public class OnboardingTestFitr extends forFitr {
     @BeforeMethod
     public void navigateToUrl() {
         driver.get(loginUrl);
-        driver.manage().window().maximize();
+//        driver.manage().window().maximize();
     }
 
     @Test
@@ -82,6 +83,9 @@ public class OnboardingTestFitr extends forFitr {
         wait.until(visibilityOfElementLocated(firstAlertDescription));
         driver.findElement(closedAlertButton).click();
         wait.until(visibilityOfElementLocated(programsHeaderElement));
-        assertEquals(driver.getCurrentUrl(), afterLoginUrl);
+        driver.findElement(userAvatarHeaderElement).click();
+        driver.findElement(logOutButton).click();
+        wait.until(visibilityOfElementLocated(loginPageTitle));
+
     }
 }

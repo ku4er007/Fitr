@@ -25,7 +25,7 @@ public class FitrOnboardingTest extends forFitr {
     By loginToFitrButton = By.xpath("//button");
     By closedAlertButton = By.xpath("//div[@class='custom-template-close']");
     By forgotLink = By.xpath("//a[@href='/onboarding/forgot_password']");
-    By programsHeaderElement = By.xpath("//a[@class='nav-link router-link-exact-active active'][contains(text(),'Programs')]");
+    By programsHeaderElement = By.xpath("//a[@class='nav-link active']");
     By userAvatarHeaderElement = By.xpath("//div[@class='avatar sm2 circle avatar-empty fit_cover']");
     By logOutButton = By.xpath("//button[@class='btn btn-outline-danger']");
     By cancelForgotButton = By.xpath("//a[@href='/onboarding/sign_in']");
@@ -36,7 +36,7 @@ public class FitrOnboardingTest extends forFitr {
     @BeforeMethod
     public void navigateToUrl() {
         driver.get(loginUrl);
-        driver.manage().window().maximize();
+//        driver.manage().window().maximize();
 
     }
 
