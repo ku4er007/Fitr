@@ -19,8 +19,7 @@ public class forCreatePrograms {
     By loginToFitrButton = By.xpath("//button");
     String email = "ku4er007@gmail.com";
     String password = "vndzqh2sgn";
-    By programsHeaderElement = By.xpath("//a[@class='nav-link router-link-exact-active active'][contains(text(),'Programs')]");
-    String programDescription = "Test long test description, Test long test description, Test long test description, Test long test description";
+    By programsHeaderElement = By.xpath("//a[@class='nav-link active']");
 
 
     @BeforeClass
