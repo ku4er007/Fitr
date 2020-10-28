@@ -1,3 +1,6 @@
+package OnboardingTests;
+
+import OnboardingTests.forFitr;
 import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
