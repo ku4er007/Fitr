@@ -1,14 +1,21 @@
 package createPrograms;
 
 import org.openqa.selenium.By;
-import org.testng.Assert;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import javax.swing.*;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 import static org.testng.AssertJUnit.assertEquals;
 
 public class createCoachProgram1Test extends forCreatePrograms {
+//    Actions actions = new Actions(driver);
+
     By userAvatarHeaderElement = By.xpath("//div[@class='avatar sm2 circle avatar-empty fit_cover']");
     By logOutButton = By.xpath("//button[@class='btn btn-outline-danger']");
     By createNewProgramButton = By.xpath("//a[@href='/coach/programs/create/choose-plan-type'][contains(text(),'Create new Program')]");
@@ -32,7 +39,10 @@ public class createCoachProgram1Test extends forCreatePrograms {
     @BeforeMethod
     public void navigateToUrl() {
         driver.get(loginUrl);
+        driver.manage().window().maximize();
+
     }
+
 
     @Test
     public void positiveCreateCoachProgramTest() {
@@ -47,8 +57,15 @@ public class createCoachProgram1Test extends forCreatePrograms {
 
         wait.until(visibilityOfElementLocated(By.xpath("//h5")));
         driver.findElement(yesContinueAlertButton).click();
+
+        //scroll
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,700)", "");
         wait.until(visibilityOfElementLocated(programTitleInputField)).click();
         driver.findElement(programTitleInputField).sendKeys("Test Title");
+        //scroll
+
+
         wait.until(visibilityOfElementLocated(requiredExperienceSelector));
         driver.findElement(requiredExperienceSelectorChange).click();
         driver.findElement(dailyTrainingTimeInputField).sendKeys("20");
@@ -56,11 +73,31 @@ public class createCoachProgram1Test extends forCreatePrograms {
         driver.findElement(sessionsPerDayInputField).sendKeys("3");
         driver.findElement(descriptionProgramInputField).sendKeys("test test test");
         driver.findElement(step2Button).click();
+//
+//        wait.until(visibilityOfElementLocated(By.xpath("//iframe[@name='intercom-tour-frame']")));
+//        driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@name='intercom-tour-frame']")));
+//        driver.findElement(By.xpath("//span[@aria-label='Close']")).click();
+//        driver.switchTo().parentFrame();
 
         wait.until(visibilityOfElementLocated(gotItAlertButton)).click();
-        wait.until(visibilityOfElementLocated(By.xpath("//div[@id='step-title']")));
+//        wait.until(visibilityOfElementLocated(By.xpath("//iframe[@name='intercom-tour-frame']")));
+
+//        driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@name='intercom-tour-frame']")));
+//        driver.findElement(By.xpath("//span[@aria-label='Close']")).click();
+//        driver.switchTo().parentFrame();
+//        wait.until(visibilityOfElementLocated(By.xpath("//div[@id='step-title']")));
+//        driver.findElement(By.xpath("//span[@aria-label='Close']")).click();
+        //scroll
+        js.executeScript("window.scrollBy(0,700)", "");
+
         driver.findElement(publishTheProgramButton).click();
         wait.until(visibilityOfElementLocated(By.xpath("//div[@class='alert alert-fancy']")));
+////
+        wait.until(visibilityOfElementLocated(By.xpath("//iframe[@name='intercom-tour-frame']")));
+        driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@name='intercom-tour-frame']")));
+        driver.findElement(By.xpath("//span[@aria-label='Close']")).click();
+        driver.switchTo().parentFrame();
+        //////
         driver.findElement(publishMyProgramButton).click();
         wait.until(visibilityOfElementLocated(By.xpath("//h4")));
         driver.findElement(nextButtonInPublishProcess).click();

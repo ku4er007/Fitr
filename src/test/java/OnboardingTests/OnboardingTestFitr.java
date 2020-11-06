@@ -10,12 +10,14 @@ import static org.testng.AssertJUnit.assertEquals;
 public class OnboardingTestFitr extends forFitr {
     String loginUrl = "https://dev.fitr.training/onboarding/sign_in";
     String signUpUrl = "https://dev.fitr.training/onboarding/role";
+    String programsUrl = "https://dev.fitr.training/user/my_programs/active";
     By userAvatarHeaderElement = By.xpath("//div[@class='avatar sm2 circle avatar-empty fit_cover']");
     By logOutButton = By.xpath("//button[@class='btn btn-outline-danger']");
     By loginPageTitle = By.xpath("//h1");
     By signupHyperlink = By.xpath("//a[@href='/onboarding/role']");
     By loginHyperlink = By.xpath("//a[@href='/onboarding/sign_in']");
     By coachButton = By.xpath("//a[@class='onboarding-link onboarding-link_coach']");
+    By clientButton = By.xpath("//a[@class='onboarding-link onboarding-link_client']");
     By standaloneCoachButton = By.xpath("//a[@class='onboarding-link' and @id='standalonestart']");
     By firstNameInputFieldLabel = By.xpath("//label[contains(text(),'First Name')]");
     By firstNameInputField = By.xpath("//input[@id='first_name']");
@@ -32,12 +34,17 @@ public class OnboardingTestFitr extends forFitr {
     By confirmPasswordInputField = By.xpath("//input[@id='confirm_password']");
     By agreeCheckBox = By.xpath("//div[@class='custom-control custom-checkbox']");
     By startTrialButton = By.xpath("//button[@id='coachsignup']");
+    By createAccountButton = By.xpath("//button[@id='athletesignup']");
+    By profileInfoAlertTitle = By.xpath("//h5[@id='__BVID__17___BV_modal_title_']");
+    By genderMaleButton = By.xpath("//div[@class='gender gender__male']");
+    By saveGenderButton = By.xpath("//button[@type='button']");
+
     By firstAlertDescription = By.xpath("//p[@class='mb-0']");
     By closedAlertButton = By.xpath("//button[@class='close']");
     By programsHeaderElement = By.xpath("//a[@class='nav-link active']");
     String firstName = "Константин";
     String lastName = "Дорошенко";
-    String newEmail = "ku4er007+111@gmail.com";
+    String newEmail = "vladlen+736@mailinator.com";
     String newPassword = "Zaq123123!";
     String confirmNewPassword = "Zaq123123!";
 
@@ -87,5 +94,38 @@ public class OnboardingTestFitr extends forFitr {
         driver.findElement(logOutButton).click();
         wait.until(visibilityOfElementLocated(loginPageTitle));
 
+    }
+
+    @Test
+    public void positiveSignUpAsClient() {
+        driver.findElement(signupHyperlink).click();
+        assertEquals(driver.getCurrentUrl(), signUpUrl);
+        wait.until(visibilityOfElementLocated(clientButton));
+        driver.findElement(clientButton).click();
+
+        wait.until(visibilityOfElementLocated(firstNameInputFieldLabel));
+        driver.findElement(firstNameInputField).sendKeys(firstName);
+        driver.findElement(lastNameInputField).sendKeys(lastName);
+        driver.findElement(emailInputField).sendKeys(newEmail);
+        driver.findElement(dateOfBirthMenu).click();
+
+        wait.until(visibilityOfElementLocated(calendarSelector));
+        driver.findElement(yearSelector).click();
+        wait.until(visibilityOfElementLocated(previousYearButton)).click();
+        wait.until(visibilityOfElementLocated(birthYear)).click();
+        wait.until(visibilityOfElementLocated(birthMonth)).click();
+        wait.until(visibilityOfElementLocated(birthDay)).click();
+        wait.until(visibilityOfElementLocated(By.xpath("//select[@class='custom-select']"))).click();
+        wait.until(visibilityOfElementLocated(By.xpath("//option[contains(text(),'Ukrain')]"))).click();
+
+        driver.findElement(passwordInputField).sendKeys(newPassword);
+        driver.findElement(confirmPasswordInputField).sendKeys(confirmNewPassword);
+        driver.findElement(agreeCheckBox).click();
+        driver.findElement(createAccountButton).click();
+
+        wait.until(visibilityOfElementLocated(profileInfoAlertTitle));
+        driver.findElement(genderMaleButton).click();
+        wait.until(visibilityOfElementLocated(saveGenderButton)).click(); //тут падает, не нажимается на кнопку Save
+        assertEquals(driver.getCurrentUrl(), programsUrl);
     }
 }
