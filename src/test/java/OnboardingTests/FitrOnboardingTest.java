@@ -25,9 +25,9 @@ public class FitrOnboardingTest extends forFitr {
     By loginToFitrButton = By.xpath("//button");
     By closedAlertButton = By.xpath("//div[@class='custom-template-close']");
     By forgotLink = By.xpath("//a[@href='/onboarding/forgot_password']");
-    By programsHeaderElement = By.xpath("//a[@class='nav-link active']");
-    By userAvatarHeaderElement = By.xpath("//div[@class='avatar sm2 circle avatar-empty fit_cover']");
-    By logOutButton = By.xpath("//button[@class='btn btn-outline-danger']");
+//    By programsHeaderElement = By.xpath("//a[@class='nav-link active']");
+//    By userAvatarHeaderElement = By.xpath("//div[@class='avatar sm2 circle avatar-empty fit_cover']");
+//    By logOutButton = By.xpath("//button[@class='btn btn-outline-danger']");
     By cancelForgotButton = By.xpath("//a[@href='/onboarding/sign_in']");
     By congratsAlert = By.xpath("//div[@class='custom-template-title']");
     By invalidMessage = By.xpath("//div[@class='invalid-feedback']");
@@ -129,15 +129,15 @@ public class FitrOnboardingTest extends forFitr {
         assertEquals(driver.getCurrentUrl(), loginUrl);
     }
 
-    @Test
-    public void positiveLoginTest3() {
-        wait.until(visibilityOfElementLocated(loginPageTitle));
-        driver.findElement(emailInputField).sendKeys(email);
-        driver.findElement(passwordInputField).sendKeys(password);
-        driver.findElement(loginToFitrButton).click();
-        wait.until(visibilityOfElementLocated(programsHeaderElement));
-        driver.findElement(userAvatarHeaderElement).click();
-        wait.until(visibilityOfElementLocated(logOutButton)).click();
-        wait.until(visibilityOfElementLocated(loginPageTitle));
-    }
+//    @Test
+//    public void positiveLoginTest3() {
+//        wait.until(visibilityOfElementLocated(loginPageTitle));
+//        driver.findElement(emailInputField).sendKeys(email);
+//        driver.findElement(passwordInputField).sendKeys(password);
+//        driver.findElement(loginToFitrButton).click();
+//        wait.until(visibilityOfElementLocated(programsHeaderElement));
+//        driver.findElement(userAvatarHeaderElement).click();
+//        wait.until(visibilityOfElementLocated(logOutButton)).click();
+//        wait.until(visibilityOfElementLocated(loginPageTitle));
+//    }
 }

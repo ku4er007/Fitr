@@ -17,8 +17,8 @@ public class forCreatePrograms {
     By emailInputField = By.xpath("//input[@id='email']");
     By passwordInputField = By.name("current-password");
     By loginToFitrButton = By.xpath("//button");
-    String email = "ku4er007@gmail.com";
-    String password = "vndzqh2sgn";
+    String email = "ku4er007+10@gmail.com";
+    String password = "Zaq123";
     By programsHeaderElement = By.xpath("//a[@class='nav-link active']");
 
 
